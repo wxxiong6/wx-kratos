@@ -105,3 +105,4 @@ var {{cookiecutter.service_name}}_ServiceDesc = grpc.ServiceDesc{
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "helloworld/v1/{{cookiecutter.repo_name}}.proto",
 }
+

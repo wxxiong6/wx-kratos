@@ -223,3 +223,4 @@ func file_helloworld_v1_{{cookiecutter.repo_name}}_proto_init() {
 	file_helloworld_v1_{{cookiecutter.repo_name}}_proto_goTypes = nil
 	file_helloworld_v1_{{cookiecutter.repo_name}}_proto_depIdxs = nil
 }
+
