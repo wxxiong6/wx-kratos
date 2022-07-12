@@ -4,7 +4,8 @@ import (
 	"flag"
 	"os"
 
-	"{{cookiecutter.module_name}}/internal/conf"
+	"first/internal/conf"
+
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/config"
 	"github.com/go-kratos/kratos/v2/config/file"
@@ -12,15 +13,12 @@ import (
 	"github.com/go-kratos/kratos/v2/middleware/tracing"
 	"github.com/go-kratos/kratos/v2/transport/grpc"
 	"github.com/go-kratos/kratos/v2/transport/http"
+	"github.com/wxxiong6/kratos-pkg-zap_log/zap_log"
 )
 
-// go build -ldflags "-X main.Version=x.y.z"
 var (
-	// Name is the name of the compiled software.
-	Name string
-	// Version is the version of the compiled software.
-	Version string
-	// flagconf is the config flag.
+	Name     = "{{cookiecutter.porject_name}}.{{cookiecutter_module_name}}.service"
+	Version  string
 	flagconf string
 
 	id, _ = os.Hostname()
@@ -46,9 +44,7 @@ func newApp(logger log.Logger, hs *http.Server, gs *grpc.Server) *kratos.App {
 
 func main() {
 	flag.Parse()
-	logger := log.With(log.NewStdLogger(os.Stdout),
-		"ts", log.DefaultTimestamp,
-		"caller", log.DefaultCaller,
+	logger := log.With(zap_log.Logger(),
 		"service.id", id,
 		"service.name", Name,
 		"service.version", Version,

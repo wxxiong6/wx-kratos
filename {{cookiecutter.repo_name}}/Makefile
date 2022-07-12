@@ -3,6 +3,10 @@ VERSION=$(shell git describe --tags --always)
 INTERNAL_PROTO_FILES=$(shell find internal -name *.proto)
 API_PROTO_FILES=$(shell find api -name *.proto)
 
+.PHONY: fmt
+fmt:
+	goimports -w -l backend/
+	gofmt -w -l backend/
 .PHONY: init
 # init env
 init:
@@ -11,6 +15,7 @@ init:
 	go install github.com/go-kratos/kratos/cmd/kratos/v2@latest
 	go install github.com/go-kratos/kratos/cmd/protoc-gen-go-http/v2@latest
 	go install github.com/google/gnostic/cmd/protoc-gen-openapi@latest
+	go install github.com/favadi/protoc-go-inject-tag@latest
 
 .PHONY: config
 # generate internal proto
@@ -31,6 +36,14 @@ api:
  	       --openapi_out==paths=source_relative:. \
 	       $(API_PROTO_FILES)
 
+swagger:
+		protoc --proto_path=. \
+				--proto_path=./third_party \
+				--openapiv2_out . \
+				--openapiv2_opt logtostderr=true \
+				--openapiv2_opt json_names_for_fields=false \
+				$(API_PROTO_FILES)
+
 .PHONY: build
 # build
 build:
@@ -49,6 +62,10 @@ all:
 	make api;
 	make config;
 	make generate;
+	make omitempty;
+omitempty:
+	make api;
+	protoc-go-inject-tag -input=./api/{{cookiecutter.api_nam}}/v1/*.pb.go;
 
 # show help
 help:

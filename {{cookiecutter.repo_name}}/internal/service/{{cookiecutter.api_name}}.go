@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 
-	v1 "{{cookiecutter.module_name}}/api/helloworld/v1"
+	v1 "{{cookiecutter.module_name}}/api/{{cookiecutter.api_name}}/v1"
 	"{{cookiecutter.module_name}}/internal/biz"
 )
 
