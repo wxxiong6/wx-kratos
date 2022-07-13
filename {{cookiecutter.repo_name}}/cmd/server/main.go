@@ -17,7 +17,7 @@ import (
 )
 
 var (
-	Name     = "{{cookiecutter.porject_name}}.{{cookiecutter_module_name}}.service"
+	Name     = "{{cookiecutter.project_name}}.{{cookiecutter_module_name}}.service"
 	Version  string
 	flagconf string
 
