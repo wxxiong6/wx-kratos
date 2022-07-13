@@ -65,7 +65,7 @@ all:
 	make omitempty;
 omitempty:
 	make api;
-	protoc-go-inject-tag -input=./api/{{cookiecutter.api_nam}}/v1/*.pb.go;
+	protoc-go-inject-tag -input=./api/{{cookiecutter.api_name}}/v1/*.pb.go;
 
 # show help
 help:
