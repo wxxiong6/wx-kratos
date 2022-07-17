@@ -29,6 +29,6 @@ func NewHTTPServer(c *conf.Server, {{cookiecutter.repo_name}} *service.{{cookiec
 		opts = append(opts, http.Timeout(c.Http.Timeout.AsDuration()))
 	}
 	srv := http.NewServer(opts...)
-	v1.Register{{cookiecutter.service_name}}HTTPServer(srv, {{cookiecutter.repo_name}})
+	v1.Register{{cookiecutter.service_name}}ServiceHTTPServer(srv, {{cookiecutter.repo_name}})
 	return srv
 }

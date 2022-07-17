@@ -36,6 +36,6 @@ func (r *{{cookiecutter.repo_name}}Repo) Get(ctx context.Context, id int64) (*bi
 }
 
 func (r *{{cookiecutter.repo_name}}Repo) Delete(ctx context.Context, id int64) error {
-return nil, nil
+return nil
 }
 

@@ -29,6 +29,6 @@ func NewGRPCServer(c *conf.Server, {{cookiecutter.repo_name}} *service.{{cookiec
 		opts = append(opts, grpc.Timeout(c.Grpc.Timeout.AsDuration()))
 	}
 	srv := grpc.NewServer(opts...)
-	v1.Register{{cookiecutter.service_name}}Server(srv, {{cookiecutter.repo_name}})
+	v1.Register{{cookiecutter.service_name}}ServiceServer(srv, {{cookiecutter.repo_name}})
 	return srv
 }
