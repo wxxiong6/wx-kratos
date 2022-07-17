@@ -5,6 +5,7 @@ import (
 	"{{cookiecutter.module_name}}/internal/conf"
 	"{{cookiecutter.module_name}}/internal/service"
 	"github.com/go-kratos/kratos/v2/log"
+	"github.com/go-kratos/kratos/v2/middleware/logging"
 	"github.com/go-kratos/kratos/v2/middleware/recovery"
 	"github.com/go-kratos/kratos/v2/transport/http"
 )
@@ -14,6 +15,8 @@ func NewHTTPServer(c *conf.Server, {{cookiecutter.repo_name}} *service.{{cookiec
 	var opts = []http.ServerOption{
 		http.Middleware(
 			recovery.Recovery(),
+			logging.Server(logger),
+
 		),
 	}
 	if c.Http.Network != "" {

@@ -1,30 +1,80 @@
 syntax = "proto3";
 
-package {{cookiecutter.api_name}}.v1;
+package {{cookiecutter.module_name}}.v1;
 
+import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
 import "google/api/annotations.proto";
 
-option go_package = "{{cookiecutter.module_name}}/api/{{cookiecutter.api_name}}/v1;v1";
+option go_package = "{{cookiecutter.module_name}}/api/{{cookiecutter.module_name}}/v1;v1";
 option java_multiple_files = true;
-option java_package = "dev.kratos.api.{{cookiecutter.api_name}}.v1";
-option java_outer_classname = "{{cookiecutter.api_name}}ProtoV1";
+option java_package = "dev.kratos.api.{{cookiecutter.module_name}}.v1";
+option java_outer_classname = "{{cookiecutter.module_name}}ProtoV1";
 
 // The greeting service definition.
-service {{cookiecutter.service_name}} {
+service {{cookiecutter.service_name}}Service {
   // Sends a greeting
-  rpc SayHello (HelloRequest) returns (HelloReply) {
+  rpc List{{cookiecutter.service_name}} (List{{cookiecutter.service_name}}Request) returns (List{{cookiecutter.service_name}}Response) {
     option (google.api.http) = {
-      get: "/{{cookiecutter.api_name}}/{name}"
+      get: "/v1/{{cookiecutter.module_name}}s"
+    };
+  }
+
+  rpc GetBook(Get{{cookiecutter.service_name}}Request) returns ({{cookiecutter.service_name}}) {
+      option (google.api.http) = {
+        get: "/v1/{{cookiecutter.module_name}}s/{{cookiecutter.module_name}}_id"
+      };
+  }
+
+  rpc Create{{cookiecutter.service_name}}(Create{{cookiecutter.service_name}}Request) returns ({{cookiecutter.service_name}}) {
+    option (google.api.http) = {
+      post: "/v1/{{cookiecutter.module_name}}s"
+      body: "*"
+    };
+  }
+
+  rpc UpdateBook(Update{{cookiecutter.service_name}}Request) returns ({{cookiecutter.service_name}}) {
+    option (google.api.http) = {
+    patch: "/v1/{{cookiecutter.module_name}}s"
+    body: "*"
+    };
+  }
+
+  rpc DeleteBook(Delete{{cookiecutter.service_name}}Request) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1/{{cookiecutter.module_name}}s"
     };
   }
 }
 
-// The request message containing the user's name.
-message HelloRequest {
-  string name = 1;
+message {{cookiecutter.service_name}} {
+
 }
 
-// The response message containing the greetings
-message HelloReply {
-  string message = 1;
+message List{{cookiecutter.service_name}}Request {
+  int32 page_size = 1;
+  string page_token = 2;
+}
+
+message List{{cookiecutter.service_name}}Response {
+   repeated {{cookiecutter.service_name}} {{cookiecutter.module_name}}s = 1;
+   string next_page_token = 2;
+}
+
+message Get{{cookiecutter.service_name}}Request {
+  string {{cookiecutter.module_name}}_id = 1;
+}
+
+message Create{{cookiecutter.service_name}}Request{
+    {{cookiecutter.service_name}} {{cookiecutter.module_name}} = 1;
+}
+
+message Update{{cookiecutter.service_name}}Request {
+  {{cookiecutter.service_name}} {{cookiecutter.module_name}} = 1;
+  google.protobuf.FieldMask update_mask = 2;
+}
+
+
+message Delete{{cookiecutter.service_name}}Request {
+  string {{cookiecutter.module_name}}_id  = 1;
 }

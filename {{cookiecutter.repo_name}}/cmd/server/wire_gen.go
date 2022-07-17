@@ -24,7 +24,7 @@ func wireApp(confServer *conf.Server, confData *conf.Data, logger log.Logger) (*
 		return nil, nil, err
 	}
 	{{cookiecutter.repo_name}}Repo := data.New{{cookiecutter.service_name}}Repo(dataData, logger)
-	{{cookiecutter.repo_name}}Usecase := biz.New{{cookiecutter.service_name}}Usecase({{cookiecutter.repo_name}}Repo, logger)
+	{{cookiecutter.repo_name}}UseCase := biz.New{{cookiecutter.service_name}}UseCase({{cookiecutter.repo_name}}Repo, logger)
 	{{cookiecutter.repo_name}}Service := service.New{{cookiecutter.service_name}}Service({{cookiecutter.repo_name}}Usecase)
 	httpServer := server.NewHTTPServer(confServer, {{cookiecutter.repo_name}}Service, logger)
 	grpcServer := server.NewGRPCServer(confServer, {{cookiecutter.repo_name}}Service, logger)

@@ -18,7 +18,7 @@ import (
 
 var (
 	Name     = "{{cookiecutter.project_name}}.{{cookiecutter.module_name}}.service"
-	Version  string
+	Version  = "0.1.0" 
 	flagconf string
 
 	id, _ = os.Hostname()
