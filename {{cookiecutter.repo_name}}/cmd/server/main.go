@@ -13,12 +13,12 @@ import (
 	"github.com/go-kratos/kratos/v2/middleware/tracing"
 	"github.com/go-kratos/kratos/v2/transport/grpc"
 	"github.com/go-kratos/kratos/v2/transport/http"
-	"github.com/wxxiong6/kratos-pkg-zap_log/zap_log"
+	"github.com/wxxiong6/kratos-pkg/zap_log"
 )
 
 var (
 	Name     = "{{cookiecutter.project_name}}.{{cookiecutter.module_name}}.service"
-	Version  = "0.1.0" 
+	Version  = "0.1.0"
 	flagconf string
 
 	id, _ = os.Hostname()
