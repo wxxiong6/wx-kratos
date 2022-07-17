@@ -19,7 +19,7 @@ type {{cookiecutter.service_name}}Repo interface {
 	List(context.Context, int32, string) ([]*{{cookiecutter.service_name}}, error)
 	Get(context.Context, int64) (*{{cookiecutter.service_name}}, error)
 	Create(context.Context, *{{cookiecutter.service_name}}) (*{{cookiecutter.service_name}}, error)
-	Update(context.Context, int64, *{{cookiecutter.service_name}}) (*{{cookiecutter.service_name}}, error)
+	Update(context.Context, *{{cookiecutter.service_name}}, []string) (*{{cookiecutter.service_name}}, error)
 	Delete(context.Context, int64) error
 }
 

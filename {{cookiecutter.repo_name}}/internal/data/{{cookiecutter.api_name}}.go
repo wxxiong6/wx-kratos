@@ -27,7 +27,7 @@ func (r *{{cookiecutter.repo_name}}Repo) Create(ctx context.Context, g *biz.{{co
 	return g, nil
 }
 
-func (r *{{cookiecutter.repo_name}}Repo) Update(ctx context.Context, g *biz.{{cookiecutter.service_name}}) (*biz.{{cookiecutter.service_name}}, error) {
+func (r *{{cookiecutter.repo_name}}Repo) Update(ctx context.Context, g *biz.{{cookiecutter.service_name}}, fm []string) (*biz.{{cookiecutter.service_name}}, error) {
 	return g, nil
 }
 

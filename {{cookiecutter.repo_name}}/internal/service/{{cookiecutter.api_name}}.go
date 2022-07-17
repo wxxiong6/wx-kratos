@@ -18,7 +18,7 @@ func New{{cookiecutter.service_name}}Service(uc *biz.{{cookiecutter.service_name
 }
 
 func (s *{{cookiecutter.service_name}}Service) List(ctx context.Context, in *v1.List{{cookiecutter.service_name}}Request) (*v1.List{{cookiecutter.service_name}}Response, error) {
-	rv, err := s.uc.List(ctx, PageSize, PageToken)
+	_, err := s.uc.List(ctx, in.PageSize, in.PageToken)
 	if err != nil {
 		return nil, err
 	}
@@ -30,7 +30,7 @@ func (s *{{cookiecutter.service_name}}Service) List(ctx context.Context, in *v1.
 	//}
 
 	return &v1.List{{cookiecutter.service_name}}Response {
-		{{cookiecutter.service_name}}: rs,
+		{{cookiecutter.service_name}}s: rs,
 	}, nil
 }
 
@@ -56,8 +56,15 @@ func (s *{{cookiecutter.service_name}}Service) Get(ctx context.Context, in *v1.G
 	}, nil
 }
 
-func (s *{{cookiecutter.service_name}}Service) Update(ctx context.Context, in *v1.Update{{cookiecutter.service_name}}Request) (*v1.Empty, error) {
-	return s.uc.Update(ctx, in)
+func (s *{{cookiecutter.service_name}}Service) Update(ctx context.Context, in *v1.Update{{cookiecutter.service_name}}Request) (*v1.{{cookiecutter.service_name}}, error) {
+	_, err := s.uc.Update(ctx, &biz.First{}, in.UpdateMask.Paths)
+	if err != nil {
+		return nil, err
+	}
+
+	return &v1.First{
+	//Id: x.Id,
+	}, nil
 }
 
 func (s *{{cookiecutter.service_name}}Service) Delete(ctx context.Context, in *v1.Delete{{cookiecutter.service_name}}Request) (*v1.Delete{{cookiecutter.service_name}}Response, error) {
