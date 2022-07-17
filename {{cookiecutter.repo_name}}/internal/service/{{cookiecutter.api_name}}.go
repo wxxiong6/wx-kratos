@@ -35,40 +35,41 @@ func (s *{{cookiecutter.service_name}}Service) List(ctx context.Context, in *v1.
 }
 
 func (s *{{cookiecutter.service_name}}Service) Create(ctx context.Context, in *v1.Create{{cookiecutter.service_name}}Request) (*v1.{{cookiecutter.service_name}}, error) {
-	_, err := s.uc.Create(ctx, &biz.First{})
+	_, err := s.uc.Create(ctx, &biz.{{cookiecutter.service_name}}{})
 	if err != nil {
 		return nil, err
 	}
 
-	return &v1.First {
+	return &v1.{{cookiecutter.service_name}} {
 	//Id: x.Id,
 	}, nil
 }
 
 func (s *{{cookiecutter.service_name}}Service) Get(ctx context.Context, in *v1.Get{{cookiecutter.service_name}}Request) (*v1.{{cookiecutter.service_name}}, error) {
-	_, err := s.uc.Get(ctx, in.Id)
+	var id int64
+	_, err := s.uc.Get(ctx, id)
 	if err != nil {
 		return nil, err
 	}
 
-	return &v1.GetOrderReply{
+	return &v1.{{cookiecutter.service_name}}{
 		//Id: x.Id,
 	}, nil
 }
 
 func (s *{{cookiecutter.service_name}}Service) Update(ctx context.Context, in *v1.Update{{cookiecutter.service_name}}Request) (*v1.{{cookiecutter.service_name}}, error) {
-	_, err := s.uc.Update(ctx, &biz.First{}, in.UpdateMask.Paths)
+	_, err := s.uc.Update(ctx, &biz.{{cookiecutter.service_name}}{}, in.UpdateMask.Paths)
 	if err != nil {
 		return nil, err
 	}
 
-	return &v1.First{
+	return &v1.{{cookiecutter.service_name}}{
 	//Id: x.Id,
 	}, nil
 }
 
-func (s *{{cookiecutter.service_name}}Service) Delete(ctx context.Context, in *v1.Delete{{cookiecutter.service_name}}Request) (*v1.Delete{{cookiecutter.service_name}}Response, error) {
-	_, err := s.uc.Create(ctx, &biz.First{})
+func (s *{{cookiecutter.service_name}}Service) Delete(ctx context.Context, in *v1.Delete{{cookiecutter.service_name}}Request)  error {
+	_, err := s.uc.Create(ctx, &biz.{{cookiecutter.service_name}}{})
 	if err != nil {
 		return err
 	}

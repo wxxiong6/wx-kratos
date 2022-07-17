@@ -41,8 +41,8 @@ func (uc *{{cookiecutter.service_name}}UseCase) Create(ctx context.Context, g *{
 	return uc.repo.Create(ctx, g)
 }
 
-func (uc *{{cookiecutter.service_name}}UseCase) Update(ctx context.Context, id int64, g *{{cookiecutter.service_name}}) (*{{cookiecutter.service_name}}, error) {
-	return uc.repo.Update(ctx, id, g)
+func (uc *{{cookiecutter.service_name}}UseCase) Update(ctx context.Context, g *{{cookiecutter.service_name}}, fm []string) (*{{cookiecutter.service_name}}, error) {
+	return uc.repo.Update(ctx, g, fm)
 }
 
 func (uc *{{cookiecutter.service_name}}UseCase) Get(ctx context.Context, id int64) (*{{cookiecutter.service_name}}, error) {
