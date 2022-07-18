@@ -65,7 +65,7 @@ message Get{{cookiecutter.service_name}}Request {
   string {{cookiecutter.module_name}}_id = 1;
 }
 
-message Create{{cookiecutter.service_name}}Request{
+message Create{{cookiecutter.service_name}}Request {
     {{cookiecutter.service_name}} {{cookiecutter.module_name}} = 1;
 }
 
