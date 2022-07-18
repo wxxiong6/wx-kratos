@@ -20,7 +20,7 @@ service {{cookiecutter.service_name}}Service {
     };
   }
 
-  rpc GetBook(Get{{cookiecutter.service_name}}Request) returns ({{cookiecutter.service_name}}) {
+  rpc Get{{cookiecutter.service_name}}(Get{{cookiecutter.service_name}}Request) returns ({{cookiecutter.service_name}}) {
       option (google.api.http) = {
         get: "/v1/{{cookiecutter.module_name}}s/{{cookiecutter.module_name}}_id"
       };
@@ -33,14 +33,14 @@ service {{cookiecutter.service_name}}Service {
     };
   }
 
-  rpc UpdateBook(Update{{cookiecutter.service_name}}Request) returns ({{cookiecutter.service_name}}) {
+  rpc Update{{cookiecutter.service_name}}(Update{{cookiecutter.service_name}}Request) returns ({{cookiecutter.service_name}}) {
     option (google.api.http) = {
     patch: "/v1/{{cookiecutter.module_name}}s"
     body: "*"
     };
   }
 
-  rpc DeleteBook(Delete{{cookiecutter.service_name}}Request) returns (google.protobuf.Empty) {
+  rpc Delete{{cookiecutter.service_name}}(Delete{{cookiecutter.service_name}}Request) returns (google.protobuf.Empty) {
     option (google.api.http) = {
       delete: "/v1/{{cookiecutter.module_name}}s"
     };
