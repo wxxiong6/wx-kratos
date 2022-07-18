@@ -7,6 +7,7 @@ import (
 	v1 "{{cookiecutter.module_name}}/api/{{cookiecutter.api_name}}/v1"
 	"{{cookiecutter.module_name}}/internal/conf"
 	"{{cookiecutter.module_name}}/internal/service"
+
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-kratos/kratos/v2/transport/grpc"
 )

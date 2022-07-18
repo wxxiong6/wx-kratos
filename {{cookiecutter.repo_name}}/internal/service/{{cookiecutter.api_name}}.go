@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"google.golang.org/protobuf/types/known/emptypb"
 
 	v1 "{{cookiecutter.module_name}}/api/{{cookiecutter.module_name}}/v1"
 	"{{cookiecutter.module_name}}/internal/biz"
@@ -69,10 +70,10 @@ func (s *{{cookiecutter.service_name}}Service) Update{{cookiecutter.service_name
 }
 
 func (s *{{cookiecutter.service_name}}Service) Delete{{cookiecutter.service_name}}(ctx context.Context, in *v1.Delete{{cookiecutter.service_name}}Request)  (*emptypb.Empty, error) {
-	_, err := s.uc.Create(ctx, &biz.{{cookiecutter.service_name}}{})
+	_, err := s.uc.Delete(ctx, in.{{cookiecutter.service_name}}Id)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	return nil
+	return nil, err
 }
