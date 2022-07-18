@@ -34,7 +34,7 @@ func (uc *{{cookiecutter.service_name}}UseCase) List(ctx context.Context, pageSi
 }
 
 func New{{cookiecutter.service_name}}UseCase(repo {{cookiecutter.service_name}}Repo, logger log.Logger) *{{cookiecutter.service_name}}UseCase {
-	return &{{cookiecutter.service_name}}UseCase{repo: repo, log: log.NewHelper(log.With(logger, "module", "usecase/{{cookiecutter.service_name}}"))}
+	return &{{cookiecutter.service_name}}UseCase{repo: repo, log: log.NewHelper(log.With(logger, "module", "useCase/{{cookiecutter.service_name}}"))}
 }
 
 func (uc *{{cookiecutter.service_name}}UseCase) Create(ctx context.Context, g *{{cookiecutter.service_name}}) (*{{cookiecutter.service_name}}, error) {
