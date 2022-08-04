@@ -7,6 +7,7 @@ import (
 	"github.com/jmoiron/sqlx"
 
 	"github.com/go-kratos/kratos/v2/log"
+	"github.com/go-redis/redis/extra/redisotel/v8"
 	"github.com/go-redis/redis/v8"
 	"github.com/google/wire"
 	"github.com/wxxiong6/sqlhooks"
@@ -23,15 +24,14 @@ type Data struct {
 	log *log.Helper
 }
 
-// NewData .
 func NewData(c *conf.Data, logger log.Logger) (*Data, func(), error) {
-	log := log.NewHelper(log.With(logger, "module", "{{cookiecutter.module_name}}-service/data"))
+	l := log.NewHelper(log.With(logger, "module", "{{cookiecutter.module_name}}-service/data"))
 
 	sql.Register("mysqlLog", sqlhooks.Wrap(&mysql.MySQLDriver{}, loghooks.New()))
 	db, err := sqlx.Open("mysqlLog", c.Database.Source)
 	//db, err := sqlx.Open("mysql", c.Database.Source)
 	if err != nil {
-		log.Errorf("failed opening connection to sqlite: %v", err)
+		l.Errorf("failed opening connection to sqlite: %v", err)
 		panic("failed to connect database")
 	}
 
@@ -44,6 +44,10 @@ func NewData(c *conf.Data, logger log.Logger) (*Data, func(), error) {
 		ReadTimeout:  c.Redis.ReadTimeout.AsDuration(),
 	})
 
+	 rdb.AddHook(redisotel.NewTracingHook())
++    if err := rdb.Close(); err != nil {
++        l.Errorf("failed to close connection to redis: %v", err)
++     }
 	d := &Data{
 		db:  db,
 		rdb: rdb,
