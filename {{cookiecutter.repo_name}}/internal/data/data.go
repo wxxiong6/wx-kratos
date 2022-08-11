@@ -44,14 +44,14 @@ func NewData(c *conf.Data, logger log.Logger) (*Data, func(), error) {
 		ReadTimeout:  c.Redis.ReadTimeout.AsDuration(),
 	})
 
-	 rdb.AddHook(redisotel.NewTracingHook())
-+    if err := rdb.Close(); err != nil {
-+        l.Errorf("failed to close connection to redis: %v", err)
-+     }
+	rdb.AddHook(redisotel.NewTracingHook())
++   if err := rdb.Close(); err != nil {
++      l.Errorf("failed to close connection to redis: %v", err)
++    }
 	d := &Data{
 		db:  db,
 		rdb: rdb,
-		log: log,
+		log: l,
 	}
 	cleanup := func() {
 		log.Info("closing the data resources")

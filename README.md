@@ -3,8 +3,19 @@ Usage:
 
 ```shell
 pip3 install cookiecutter
+```
 
-cookiecutter <template>
+```shell
+cookiecutter https://github.com/wxxiong6/wx-kratos
+```
+
+```shell
+make all
+```
+
+```shell
+cd cmd/server
+wire
 ```
 
 
