@@ -45,9 +45,9 @@ func NewData(c *conf.Data, logger log.Logger) (*Data, func(), error) {
 	})
 
 	rdb.AddHook(redisotel.NewTracingHook())
-+   if err := rdb.Close(); err != nil {
-+      l.Errorf("failed to close connection to redis: %v", err)
-+    }
+    if err := rdb.Close(); err != nil {
+        l.Errorf("failed to close connection to redis: %v", err)
+     }
 	d := &Data{
 		db:  db,
 		rdb: rdb,
