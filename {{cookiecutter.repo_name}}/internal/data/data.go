@@ -1,9 +1,17 @@
 package data
 
 import (
+	"database/sql"
 	"{{cookiecutter.module_name}}/internal/conf"
+	"github.com/go-sql-driver/mysql"
+	"github.com/jmoiron/sqlx"
+
 	"github.com/go-kratos/kratos/v2/log"
+	"github.com/go-redis/redis/extra/redisotel/v8"
+	"github.com/go-redis/redis/v8"
 	"github.com/google/wire"
+	"github.com/wxxiong6/sqlhooks"
+	"github.com/wxxiong6/sqlhooks/hooks/loghooks"
 )
 
 // ProviderSet is data providers.
@@ -11,13 +19,46 @@ var ProviderSet = wire.NewSet(NewData, New{{cookiecutter.service_name}}Repo)
 
 // Data .
 type Data struct {
-	// TODO wrapped database client
+	db *sqlx.DB
+	rdb *redis.Client
+	log *log.Helper
 }
 
-// NewData .
 func NewData(c *conf.Data, logger log.Logger) (*Data, func(), error) {
-	cleanup := func() {
-		log.NewHelper(logger).Info("closing the data resources")
+	l := log.NewHelper(log.With(logger, "module", "{{cookiecutter.module_name}}-service/data"))
+
+	sql.Register("mysqlLog", sqlhooks.Wrap(&mysql.MySQLDriver{}, loghooks.New()))
+	db, err := sqlx.Open("mysqlLog", c.Database.Source)
+	//db, err := sqlx.Open("mysql", c.Database.Source)
+	if err != nil {
+		l.Errorf("failed opening connection to sqlite: %v", err)
+		panic("failed to connect database")
 	}
-	return &Data{}, cleanup, nil
+
+	rdb := redis.NewClient(&redis.Options{
+		Addr:         c.Redis.Addr,
+		Password:     c.Redis.Password,
+		DB:           int(c.Redis.Db),
+		DialTimeout:  c.Redis.DialTimeout.AsDuration(),
+		WriteTimeout: c.Redis.WriteTimeout.AsDuration(),
+		ReadTimeout:  c.Redis.ReadTimeout.AsDuration(),
+	})
+
+	rdb.AddHook(redisotel.NewTracingHook())
+    if err := rdb.Close(); err != nil {
+        l.Errorf("failed to close connection to redis: %v", err)
+     }
+	d := &Data{
+		db:  db,
+		rdb: rdb,
+		log: l,
+	}
+	cleanup := func() {
+		log.Info("closing the data resources")
+		if err := d.rdb.Close(); err != nil {
+			log.Error("close redis error", err)
+		}
+	}
+
+	return d, cleanup, nil
 }

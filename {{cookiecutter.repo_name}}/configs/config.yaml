@@ -11,5 +11,10 @@ data:
     source: root:root@tcp(127.0.0.1:3306)/test
   redis:
     addr: 127.0.0.1:6379
+    password:
+    db: 0
+    dial_timeout: 1s
     read_timeout: 0.2s
     write_timeout: 0.2s
+trace:
+    endpoint: http://localhost:14268/api/traces
