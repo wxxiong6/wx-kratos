@@ -26,6 +26,24 @@ config:
  	       --go_out=paths=source_relative:./internal \
 	       $(INTERNAL_PROTO_FILES)
 
+.PHONY: errors 
+# generate error  proto
+errors:
+	protoc --proto_path=. \
+             --proto_path=./third_party \
+             --go_out=paths=source_relative:. \
+             --go-errors_out=paths=source_relative:. \
+             $(API_PROTO_FILES)
+
+.PHONY: validate
+# generate validate client
+validate:
+	protoc --proto_path=./api \
+           --proto_path=./third_party \
+           --go_out=paths=source_relative:. \
+           --validate_out=paths=source_relative,lang=go:. \
+           $(API_PROTO_FILES)
+
 .PHONY: api
 # generate api proto
 api:
@@ -57,6 +75,9 @@ generate:
 	go get github.com/google/wire/cmd/wire@latest
 	go generate ./...
 
+
+
+
 .PHONY: all
 # generate all
 all:
@@ -67,6 +88,8 @@ all:
 omitempty:
 	make api;
 	protoc-go-inject-tag -input=./api/{{cookiecutter.api_name}}/v1/*.pb.go;
+
+
 
 # show help
 help:

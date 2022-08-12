@@ -11,9 +11,8 @@ option java_multiple_files = true;
 option java_package = "dev.kratos.api.{{cookiecutter.module_name}}.v1";
 option java_outer_classname = "{{cookiecutter.module_name}}ProtoV1";
 
-// The greeting service definition.
 service {{cookiecutter.service_name}}Service {
-  // Sends a greeting
+
   rpc List{{cookiecutter.service_name}} (List{{cookiecutter.service_name}}Request) returns (List{{cookiecutter.service_name}}Response) {
     option (google.api.http) = {
       get: "/v1/{{cookiecutter.module_name}}s"

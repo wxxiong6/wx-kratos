@@ -13,7 +13,6 @@ import (
 	"github.com/go-kratos/swagger-api/openapiv2"
 )
 
-// NewHTTPServer new a HTTP server.
 func NewHTTPServer(c *conf.Server, {{cookiecutter.repo_name}} *service.{{cookiecutter.service_name}}Service, logger log.Logger) *http.Server {
 	openAPIHandler := openapiv2.NewHandler()
 	var opts = []http.ServerOption{
