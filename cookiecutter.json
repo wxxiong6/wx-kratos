@@ -2,5 +2,5 @@
     "repo_name": "greeter",
     "service_name": "Greeter",
     "api_dir_name": "helloworld",
-    "module_name": "github.com/go-kratos/kratos-layout",
+    "module_name": "github.com/go-kratos/kratos-layout"
 }
