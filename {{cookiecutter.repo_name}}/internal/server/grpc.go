@@ -5,7 +5,7 @@ import (
 	"github.com/go-kratos/kratos/v2/middleware/recovery"
 	"github.com/go-kratos/kratos/v2/middleware/tracing"
 
-	v1 "{{cookiecutter.module_name}}/api/{{cookiecutter.api_name}}/v1"
+	v1 "{{cookiecutter.module_name}}/api/{{cookiecutter.api_dir_name}}/v1"
 	"{{cookiecutter.module_name}}/internal/conf"
 	"{{cookiecutter.module_name}}/internal/service"
 
