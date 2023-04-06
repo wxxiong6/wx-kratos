@@ -101,13 +101,9 @@ all:
 # inject tag omitempty
 inject:
 	make api;
-	protoc-go-inject-tag -input=./api/{{cookiecutter.api_dir_name}}/v1/*.pb.go;
+	protoc-go-inject-tag -input=./api/conf/v1/*.pb.go;
 
-wire:
-	wire cmd/server
 
-run:
-	go run cmd/server/main.go4;;=om 
 
 # show help
 help:

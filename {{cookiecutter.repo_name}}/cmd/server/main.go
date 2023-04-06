@@ -23,7 +23,7 @@ import (
 )
 
 var (
-	Name     = "{{cookiecutter.repo_name}}.{{cookiecutter.module_name}}.service"
+	Name     = "{{cookiecutter.module_name}}"
 	Version  = "0.1.0"
 	flagconf string
 

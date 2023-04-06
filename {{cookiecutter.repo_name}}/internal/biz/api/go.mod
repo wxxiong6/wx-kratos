@@ -1,6 +1,6 @@
-module {{cookiecutter.module_name}}
+module conf
 
-go 1.20
+go 1.18
 
 require (
 	github.com/go-kratos/kratos/v2 v2.2.1

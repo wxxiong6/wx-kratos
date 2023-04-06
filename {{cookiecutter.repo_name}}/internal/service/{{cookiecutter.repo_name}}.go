@@ -20,7 +20,7 @@ func New{{cookiecutter.service_name}}Service(uc *biz.{{cookiecutter.service_name
 
 func (s *{{cookiecutter.service_name}}Service) List{{cookiecutter.service_name}}(ctx context.Context, in *v1.List{{cookiecutter.service_name}}Request) (*v1.List{{cookiecutter.service_name}}Response, error) {
     res :=  &v1.List{{cookiecutter.service_name}}Response {}
-	_, err := s.uc.List(ctx, in.PageSize, in.PageToken)
+	_, err := s.uc.List{{cookiecutter.service_name}}(ctx, in.PageSize, in.PageToken)
 	if err != nil {
 		return res, err
 	}
@@ -38,7 +38,7 @@ func (s *{{cookiecutter.service_name}}Service) List{{cookiecutter.service_name}}
 
 func (s *{{cookiecutter.service_name}}Service) Create{{cookiecutter.service_name}}(ctx context.Context, in *v1.Create{{cookiecutter.service_name}}Request) (*v1.{{cookiecutter.service_name}}, error) {
 	res := &v1.{{cookiecutter.service_name}}{}
-	_, err := s.uc.Create(ctx, &biz.{{cookiecutter.service_name}}{})
+	_, err := s.uc.Create{{cookiecutter.service_name}}(ctx, &biz.{{cookiecutter.service_name}}{})
 	if err != nil {
 		return res, err
 	}
@@ -51,7 +51,7 @@ func (s *{{cookiecutter.service_name}}Service) Create{{cookiecutter.service_name
 func (s *{{cookiecutter.service_name}}Service) Get{{cookiecutter.service_name}}(ctx context.Context, in *v1.Get{{cookiecutter.service_name}}Request) (*v1.{{cookiecutter.service_name}}, error) {
 	res := &v1.{{cookiecutter.service_name}}{}
 	var id int64
-	_, err := s.uc.Get(ctx, id)
+	_, err := s.uc.Get{{cookiecutter.service_name}}(ctx, id)
 	if err != nil {
 		return res, err
 	}
@@ -64,7 +64,7 @@ func (s *{{cookiecutter.service_name}}Service) Get{{cookiecutter.service_name}}(
 func (s *{{cookiecutter.service_name}}Service) Update{{cookiecutter.service_name}}(ctx context.Context, in *v1.Update{{cookiecutter.service_name}}Request) (*v1.{{cookiecutter.service_name}}, error) {
 	res := &v1.{{cookiecutter.service_name}}{}
 
-	_, err := s.uc.Update(ctx, &biz.{{cookiecutter.service_name}}{}, in.UpdateMask.Paths)
+	_, err := s.uc.Update{{cookiecutter.service_name}}(ctx, &biz.{{cookiecutter.service_name}}{}, in.UpdateMask.Paths)
 	if err != nil {
 		return res, err
 	}
