@@ -6,8 +6,8 @@ import (
 	"{{cookiecutter.module_name}}/internal/biz"
 	"time"
 
-	"oasis/pkg/gorm/gormlog"
-	"oasis/pkg/gorm/trace"
+	"{{cookiecutter.module_name}}/pkg/gorm/gormlog"
+	"{{cookiecutter.module_name}}/pkg/gorm/trace"
 
 	"{{cookiecutter.module_name}}/internal/conf"
 	"github.com/go-kratos/kratos/v2/log"
