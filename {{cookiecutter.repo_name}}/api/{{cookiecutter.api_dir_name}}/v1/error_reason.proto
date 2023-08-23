@@ -4,7 +4,7 @@ package {{cookiecutter.module_name}}.v1;
 
 import "errors/errors.proto";
 
-option go_package = "{{cookiecutter.module_name}}/api/helloworld/v1;v1";
+option go_package = "{{cookiecutter.module_name}}/api/{{cookiecutter.module_name}}.v1;v1";
 option java_multiple_files = true;
 option java_package = "{{cookiecutter.module_name}}.v1";
 option objc_class_prefix = "API{{cookiecutter.module_name}}V1";
